@@ -1,0 +1,9 @@
+[build]
+  command = "npm install" # no build step, just install dependencies
+  functions = "netlify/functions"
+  publish = "." # publish current folder (no frontend here)
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
