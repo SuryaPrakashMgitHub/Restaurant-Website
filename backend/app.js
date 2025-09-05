@@ -20,8 +20,13 @@ const app = express();
 (async () => {
   try {
     await connectCloudinary();
-    connectDB();
-    console.log("✅ Cloudinary & DB connected");
+
+    if (process.env.CONNECT_DB == true) {
+      await connectDB();
+      console.log("✅ Cloudinary & DB connected");
+    } else {
+      console.log("⚠️ Skipping DB connection (MONGO_URI not set)");
+    }
   } catch (err) {
     console.error("❌ Error initializing services", err);
   }
