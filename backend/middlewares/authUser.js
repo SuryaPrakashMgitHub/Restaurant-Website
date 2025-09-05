@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const authUser = async (req, res, next) => {
+export const authUser = async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
     return res.status(401).json({ message: "Unauthorized", success: false });
@@ -14,5 +14,3 @@ const authUser = async (req, res, next) => {
     return res.status(401).json({ message: "Invalid token", success: false });
   }
 };
-
-export default authUser;
