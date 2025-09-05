@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -17,17 +16,24 @@ import orderRoutes from "./routes/order.routes.js";
 
 const app = express();
 
-// connect external services
-await connectCloudinary();
-connectDB();
+// Lazy initialization wrapper
+(async () => {
+  try {
+    await connectCloudinary();
+    connectDB();
+    console.log("✅ Cloudinary & DB connected");
+  } catch (err) {
+    console.error("❌ Error initializing services", err);
+  }
+})();
 
-// CORS setup
+// Middlewares
 const allowedOrigins = ["http://localhost:5173"];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-// API endpoints
+// Routes
 app.use("/images", express.static("uploads"));
 app.use("/api/user", userRoutes);
 app.use("/api/seller", sellerRoutes);
@@ -40,7 +46,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ status: "Server is running" });
 });
 
-// error handling
+// Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
