@@ -1,7 +1,8 @@
 [build]
-  command = "npm install" # no build step, just install dependencies
+  base = "backend"
+  command = "npm install"
   functions = "netlify/functions"
-  publish = "." # publish current folder (no frontend here)
+  publish = "."
 
 [[redirects]]
   from = "/api/*"
