@@ -6,6 +6,10 @@ import {
   registerUser,
 } from "../controller/user.controller.js";
 import authUser from "../middlewares/authUser.js";
+
+console.log("👉 checkAuth:", checkAuth);
+console.log("👉 authUser:", authUser);
+
 const router = express.Router();
 
 router.post("/register", registerUser);
