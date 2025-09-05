@@ -21,7 +21,7 @@ const app = express();
   try {
     await connectCloudinary();
 
-    if (process.env.CONNECT_DB == true) {
+    if (process.env.CONNECT_DB === "true") {
       await connectDB();
       console.log("✅ Cloudinary & DB connected");
     } else {

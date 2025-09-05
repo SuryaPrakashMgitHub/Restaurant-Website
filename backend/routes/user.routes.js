@@ -5,7 +5,7 @@ import {
   logout,
   registerUser,
 } from "../controller/user.controller.js";
-import { authUser } from "../middlewares/authUser.js";
+import authUser from "../middlewares/authUser.js";
 
 console.log("👉 checkAuth:", checkAuth);
 console.log("👉 authUser:", authUser);
